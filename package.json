@@ -1,0 +1,15 @@
+{
+  "name": "valorant-agents-random-roulette",
+  "version": "1.0.0",
+  "description": "```sh npm create astro@latest -- --template minimal ```",
+  "main": "script.js",
+  "scripts": {
+    "start": "live-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
