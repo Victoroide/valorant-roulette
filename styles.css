@@ -19,6 +19,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 90%;
     max-width: 800px;
 }
 
@@ -28,8 +29,16 @@ h1 {
 
 .content {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.left-content, .right-content {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+    margin: 0 1rem;
 }
 
 .player-inputs {
@@ -37,6 +46,14 @@ h1 {
     flex-direction: column;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    width: 100%;
+}
+
+.player-input-container {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
 }
 
 .player-input {
@@ -46,10 +63,21 @@ h1 {
     font-size: 1rem;
     background-color: #3a3a3a;
     color: #fff;
+    flex-grow: 1;
 }
 
-.player-input.highlight {
-    border: 2px solid #007bff;
+.edit-button, .delete-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.edit-button:hover, .delete-button:hover {
+    background-color: #0056b3;
 }
 
 .start-button, .spin-button, .reset-button {
@@ -70,11 +98,35 @@ h1 {
 .assigned-agents {
     margin-top: 1rem;
     text-align: left;
-    max-width: 300px;
+    width: 100%;
 }
 
 .assigned-agents h2 {
     margin-top: 0;
+}
+
+.available-agents {
+    margin-top: 1rem;
+    text-align: left;
+    width: 100%;
+}
+
+.available-agents h2 {
+    margin-top: 0;
+}
+
+.agent-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.agent-bubble {
+    padding: 10px 15px;
+    background-color: #3a3a3a;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 0.9rem;
 }
 
 .loading-container {

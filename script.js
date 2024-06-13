@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('startButton').addEventListener('click', startAssignment);
     document.getElementById('resetButton').addEventListener('click', resetAssignments);
     document.getElementById('spinButton').addEventListener('click', assignAgent);
+    updateAvailableAgentsList();
 });
 
 function createAgentsLine(agents) {
@@ -46,6 +47,7 @@ function resetAssignments() {
     const playerInputs = document.querySelectorAll('.player-input');
     playerInputs.forEach(input => {
         input.value = input.value.split(':')[0]; // Mantener solo el nombre del jugador
+        input.disabled = false; // Permitir edición
     });
 
     document.getElementById('assignedAgentsList').innerHTML = '<h2>Assigned Agents:</h2>';
@@ -54,6 +56,7 @@ function resetAssignments() {
     currentPlayerIndex = 0;
     remainingAgents = [...agents];
     updateCurrentPlayerHighlight();
+    updateAvailableAgentsList();
 }
 
 function updateCurrentPlayerHighlight() {
@@ -87,6 +90,7 @@ function assignAgent() {
         if (remainingAgents.length === 0) {
             remainingAgents = [...agents]; // Reiniciar agentes si se terminan
         }
+        updateAvailableAgentsList();
         hideLoadingAnimation();
         isAnimating = false;
     }, 1500); // Reducimos el tiempo de espera a 1.5 segundos
@@ -98,4 +102,26 @@ function showLoadingAnimation() {
 
 function hideLoadingAnimation() {
     document.getElementById('loadingContainer').style.display = 'none';
+}
+
+function updateAvailableAgentsList() {
+    const agentList = document.getElementById('agentList');
+    agentList.innerHTML = '';
+    remainingAgents.forEach(agent => {
+        const listItem = document.createElement('div');
+        listItem.className = 'agent-bubble';
+        listItem.textContent = agent;
+        agentList.appendChild(listItem);
+    });
+}
+
+function editPlayer(button) {
+    const input = button.parentNode.querySelector('.player-input');
+    input.disabled = false;
+    input.focus();
+}
+
+function deletePlayer(button) {
+    const playerContainer = button.parentNode;
+    playerContainer.remove();
 }

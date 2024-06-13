@@ -10,23 +10,48 @@
     <div class="container">
         <h1>Valorant Agents Random Roulette</h1>
         <div class="content">
-            <div class="player-inputs">
-                <input type="text" placeholder="Player 1" id="player1" class="player-input">
-                <input type="text" placeholder="Player 2" id="player2" class="player-input">
-                <input type="text" placeholder="Player 3" id="player3" class="player-input">
-                <input type="text" placeholder="Player 4" id="player4" class="player-input">
-                <input type="text" placeholder="Player 5" id="player5" class="player-input">
+            <div class="left-content">
+                <div class="player-inputs" id="playerInputs">
+                    <div class="player-input-container">
+                        <input type="text" placeholder="Player 1" class="player-input">
+                        <button class="edit-button" onclick="editPlayer(this)">Edit</button>
+                        <button class="delete-button" onclick="deletePlayer(this)">Delete</button>
+                    </div>
+                    <div class="player-input-container">
+                        <input type="text" placeholder="Player 2" class="player-input">
+                        <button class="edit-button" onclick="editPlayer(this)">Edit</button>
+                        <button class="delete-button" onclick="deletePlayer(this)">Delete</button>
+                    </div>
+                    <div class="player-input-container">
+                        <input type="text" placeholder="Player 3" class="player-input">
+                        <button class="edit-button" onclick="editPlayer(this)">Edit</button>
+                        <button class="delete-button" onclick="deletePlayer(this)">Delete</button>
+                    </div>
+                    <div class="player-input-container">
+                        <input type="text" placeholder="Player 4" class="player-input">
+                        <button class="edit-button" onclick="editPlayer(this)">Edit</button>
+                        <button class="delete-button" onclick="deletePlayer(this)">Delete</button>
+                    </div>
+                    <div class="player-input-container">
+                        <input type="text" placeholder="Player 5" class="player-input">
+                        <button class="edit-button" onclick="editPlayer(this)">Edit</button>
+                        <button class="delete-button" onclick="deletePlayer(this)">Delete</button>
+                    </div>
+                </div>
+                <button class="start-button" id="startButton">Start</button>
+                <button class="reset-button" id="resetButton" style="display: none;">Reset</button>
             </div>
-            <button class="start-button" id="startButton">Start</button>
-            <button class="reset-button" id="resetButton" style="display: none;">Reset</button>
-            <div class="assigned-agents" id="assignedAgentsList">
-                <h2>Assigned Agents:</h2>
+            <div class="right-content">
+                <div class="available-agents" id="availableAgentsList">
+                    <h2>Available Agents:</h2>
+                    <div id="agentList" class="agent-list"></div>
+                </div>
+                <button class="spin-button" id="spinButton" disabled>Spin</button>
             </div>
         </div>
         <div class="loading-container" id="loadingContainer" style="display: none;">
             <div class="loading-spinner"></div>
         </div>
-        <button class="spin-button" id="spinButton" disabled>Spin</button>
     </div>
     <script src="script.js"></script>
 </body>
