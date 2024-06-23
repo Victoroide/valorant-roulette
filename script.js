@@ -32,6 +32,7 @@ let isAnimating = false;
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('startButton').addEventListener('click', startAssignment);
     document.getElementById('shuffleButton').addEventListener('click', assignAgent);
+    document.getElementById('shuffleAllButton').addEventListener('click', shuffleAll);
     updateAvailableAgentsList();
 });
 
@@ -55,6 +56,7 @@ function startAssignment() {
     currentPlayerIndex = 0;
     remainingAgents = [...agents];
     document.getElementById('shuffleButton').disabled = false;
+    document.getElementById('shuffleAllButton').disabled = false;
     document.getElementById('startButton').disabled = true;
     updateCurrentPlayerHighlight();
     updateAvailableAgentsList();
@@ -73,19 +75,13 @@ function resetAssignments() {
     });
 
     document.getElementById('shuffleButton').disabled = false;
+    document.getElementById('shuffleAllButton').disabled = false;
     document.getElementById('startButton').textContent = 'Start';
     document.getElementById('startButton').disabled = false;
     currentPlayerIndex = 0;
     remainingAgents = [...agents];
     updateCurrentPlayerHighlight();
     updateAvailableAgentsList();
-}
-
-function updateCurrentPlayerHighlight() {
-    const playerInputs = document.querySelectorAll('.player-input');
-    playerInputs.forEach((input, index) => {
-        input.classList.toggle('highlight', index === currentPlayerIndex);
-    });
 }
 
 function assignAgent() {
@@ -113,11 +109,18 @@ function assignAgent() {
         updateCurrentPlayerHighlight();
     } else {
         document.getElementById('shuffleButton').disabled = true;
+        document.getElementById('shuffleAllButton').disabled = true;
         document.getElementById('startButton').textContent = 'Restart';
         document.getElementById('startButton').disabled = false;
     }
     hideLoadingAnimation();
     isAnimating = false;
+}
+
+function shuffleAll() {
+    while (currentPlayerIndex < players.length) {
+        assignAgent();
+    }
 }
 
 function showLoadingAnimation() {
@@ -136,6 +139,13 @@ function updateAvailableAgentsList() {
         listItem.className = 'agent-bubble';
         listItem.textContent = agent.name;
         agentList.appendChild(listItem);
+    });
+}
+
+function updateCurrentPlayerHighlight() {
+    const playerInputs = document.querySelectorAll('.player-input');
+    playerInputs.forEach((input, index) => {
+        input.classList.toggle('highlight', index === currentPlayerIndex);
     });
 }
 

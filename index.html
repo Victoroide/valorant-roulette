@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Valorant Roulette</h1>
+        <h1>Valorant Agents Random Roulette</h1>
         <div class="content">
             <div class="left-content">
                 <div class="player-inputs" id="playerInputs">
@@ -48,7 +48,7 @@
             </div>
             <div class="right-content">
                 <div class="available-agents" id="availableAgentsList">
-                    <h2>Available:</h2>
+                    <h2>Available Agents:</h2>
                     <div id="agentList" class="agent-list"></div>
                 </div>
             </div>
@@ -57,6 +57,9 @@
             <button class="start-button" id="startButton">Start</button>
             <button class="shuffle-button" id="shuffleButton" disabled>
                 <i class="fas fa-random"></i> Shuffle
+            </button>
+            <button class="shuffle-all-button" id="shuffleAllButton" disabled>
+                <i class="fas fa-random"></i> Shuffle All
             </button>
         </div>
         <div class="loading-container" id="loadingContainer" style="display: none;">

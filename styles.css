@@ -108,7 +108,7 @@ h1 {
     background-color: #1565c0;
 }
 
-.start-button, .shuffle-button {
+.start-button, .shuffle-button, .shuffle-all-button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
     cursor: pointer;
@@ -116,15 +116,14 @@ h1 {
     background-color: #43a047;
     color: #fff;
     border-radius: 10px;
-    margin-top: 1rem;
     flex: 0 0 auto;
 }
 
-.start-button:hover, .shuffle-button:hover {
+.start-button:hover, .shuffle-button:hover, .shuffle-all-button:hover {
     background-color: #388e3c;
 }
 
-.start-button[disabled], .shuffle-button[disabled] {
+.start-button[disabled], .shuffle-button[disabled], .shuffle-all-button[disabled] {
     background-color: grey;
     cursor: not-allowed;
 }
@@ -239,9 +238,11 @@ h1 {
     }
 
     .agent-img {
-        width: 30px;
-        height: 30px;
-        border-radius: 10%; 
+        width: 40px;
+        height: 40px;
+        border-radius: 15px;
+        border: 2px solid white;
+        background-color: transparent;
     }
 
     .edit-button, .delete-button {
@@ -254,17 +255,18 @@ h1 {
         justify-content: center;
     }
 
-    .start-button, .shuffle-button {
+    .start-button, .shuffle-button, .shuffle-all-button {
         padding: 0.5rem 1rem;
         font-size: 0.9rem;
-        width: 45%;
+        width: auto;
     }
 
     .button-container {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: space-around;
         gap: 1rem;
         margin-top: 1rem;
+        flex-wrap: wrap;
     }
 
     .agent-list {
@@ -276,7 +278,7 @@ h1 {
     .agent-img {
         width: 25px;
         height: 25px;
-        border-radius: 50%;
+        border-radius: 15px;
     }
 
     .edit-button, .delete-button {
@@ -286,11 +288,10 @@ h1 {
         height: 30px;
     }
 
-    .start-button, .shuffle-button {
+    .start-button, .shuffle-button, .shuffle-all-button {
         padding: 0.5rem;
         font-size: 0.8rem;
-        width: 45%;
-
+        width: 100px;
     }
 
     h1 {
