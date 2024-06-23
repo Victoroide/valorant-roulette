@@ -186,3 +186,20 @@ h1 {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.social-media {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.social-icon {
+    color: #e0e0e0;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: #1e88e5;
+}
