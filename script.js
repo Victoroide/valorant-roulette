@@ -17,18 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAvailableAgentsList();
 });
 
-function createAgentsLine(agents) {
-    // No necesitamos la creación de la línea de agentes aquí
-}
-
 function startAssignment() {
     const playerInputs = document.querySelectorAll('.player-input');
     players = [];
     playerInputs.forEach(input => {
         if (input.value.trim()) {
             players.push(input.value.trim());
-            input.disabled = true;  // Bloquear campos de texto
+            input.disabled = true;
         }
+        input.value = input.value.split(':')[0]; // Eliminar asignaciones previas
     });
 
     if (players.length === 0) {
@@ -41,16 +38,16 @@ function startAssignment() {
     document.getElementById('spinButton').disabled = false;
     document.getElementById('resetButton').style.display = 'none';
     updateCurrentPlayerHighlight();
+    updateAvailableAgentsList();
 }
 
 function resetAssignments() {
     const playerInputs = document.querySelectorAll('.player-input');
     playerInputs.forEach(input => {
-        input.value = input.value.split(':')[0]; // Mantener solo el nombre del jugador
-        input.disabled = false; // Permitir edición
+        input.value = input.value.split(':')[0];
+        input.disabled = false;
     });
 
-    document.getElementById('assignedAgentsList').innerHTML = '<h2>Assigned Agents:</h2>';
     document.getElementById('spinButton').disabled = false;
     document.getElementById('resetButton').style.display = 'none';
     currentPlayerIndex = 0;
@@ -77,23 +74,18 @@ function assignAgent() {
     const randomIndex = Math.floor(Math.random() * remainingAgents.length);
     const randomAgent = remainingAgents[randomIndex];
 
-    setTimeout(() => {
-        document.querySelectorAll('.player-input')[currentPlayerIndex].value += `: ${randomAgent}`;
-        currentPlayerIndex++;
-        if (currentPlayerIndex < players.length) {
-            updateCurrentPlayerHighlight();
-        } else {
-            document.getElementById('spinButton').disabled = true;
-            document.getElementById('resetButton').style.display = 'block';
-        }
-        remainingAgents = remainingAgents.filter(agent => agent !== randomAgent);
-        if (remainingAgents.length === 0) {
-            remainingAgents = [...agents]; // Reiniciar agentes si se terminan
-        }
-        updateAvailableAgentsList();
-        hideLoadingAnimation();
-        isAnimating = false;
-    }, 1500); // Reducimos el tiempo de espera a 1.5 segundos
+    document.querySelectorAll('.player-input')[currentPlayerIndex].value += `: ${randomAgent}`;
+    currentPlayerIndex++;
+    if (currentPlayerIndex < players.length) {
+        updateCurrentPlayerHighlight();
+    } else {
+        document.getElementById('spinButton').disabled = true;
+        document.getElementById('resetButton').style.display = 'block';
+    }
+    remainingAgents = remainingAgents.filter(agent => agent !== randomAgent);
+    updateAvailableAgentsList();
+    hideLoadingAnimation();
+    isAnimating = false;
 }
 
 function showLoadingAnimation() {
@@ -121,7 +113,8 @@ function editPlayer(button) {
     input.focus();
 }
 
-function deletePlayer(button) {
-    const playerContainer = button.parentNode;
-    playerContainer.remove();
+function deletePlayerContent(button) {
+    const input = button.parentNode.querySelector('.player-input');
+    input.value = '';
+    input.disabled = false;
 }
