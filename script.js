@@ -12,7 +12,6 @@ let isAnimating = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('startButton').addEventListener('click', startAssignment);
-    document.getElementById('resetButton').addEventListener('click', resetAssignments);
     document.getElementById('spinButton').addEventListener('click', assignAgent);
     updateAvailableAgentsList();
 });
@@ -22,7 +21,7 @@ function startAssignment() {
     players = [];
     playerInputs.forEach(input => {
         if (input.value.trim()) {
-            players.push(input.value.trim());
+            players.push({name: input.value.trim(), agent: null});
             input.disabled = true;
         }
         input.value = input.value.split(':')[0]; // Eliminar asignaciones previas
@@ -36,7 +35,7 @@ function startAssignment() {
     currentPlayerIndex = 0;
     remainingAgents = [...agents];
     document.getElementById('spinButton').disabled = false;
-    document.getElementById('resetButton').style.display = 'none';
+    document.getElementById('startButton').disabled = true;
     updateCurrentPlayerHighlight();
     updateAvailableAgentsList();
 }
@@ -49,7 +48,8 @@ function resetAssignments() {
     });
 
     document.getElementById('spinButton').disabled = false;
-    document.getElementById('resetButton').style.display = 'none';
+    document.getElementById('startButton').textContent = 'Start';
+    document.getElementById('startButton').disabled = false;
     currentPlayerIndex = 0;
     remainingAgents = [...agents];
     updateCurrentPlayerHighlight();
@@ -74,16 +74,20 @@ function assignAgent() {
     const randomIndex = Math.floor(Math.random() * remainingAgents.length);
     const randomAgent = remainingAgents[randomIndex];
 
-    document.querySelectorAll('.player-input')[currentPlayerIndex].value += `: ${randomAgent}`;
+    players[currentPlayerIndex].agent = randomAgent;
+    document.querySelectorAll('.player-input')[currentPlayerIndex].value = `${players[currentPlayerIndex].name}: ${randomAgent}`;
+    
+    remainingAgents = remainingAgents.filter(agent => agent !== randomAgent);
+    updateAvailableAgentsList();
+
     currentPlayerIndex++;
     if (currentPlayerIndex < players.length) {
         updateCurrentPlayerHighlight();
     } else {
         document.getElementById('spinButton').disabled = true;
-        document.getElementById('resetButton').style.display = 'block';
+        document.getElementById('startButton').textContent = 'Restart';
+        document.getElementById('startButton').disabled = false;
     }
-    remainingAgents = remainingAgents.filter(agent => agent !== randomAgent);
-    updateAvailableAgentsList();
     hideLoadingAnimation();
     isAnimating = false;
 }
