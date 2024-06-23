@@ -1,8 +1,27 @@
 const agents = [
-    "Brimstone", "Viper", "Omen", "Killjoy", "Cypher",
-    "Sova", "Sage", "Phoenix", "Jett", "Reyna",
-    "Raze", "Breach", "Skye", "Yoru", "Astra",
-    "KAY/O", "Chamber", "Neon", "Fade", "Harbor", "Iso", "Clove", "Deadlock"
+    { name: "Brimstone", img: "images/brimstone-avatar.jpg" },
+    { name: "Viper", img: "images/viper-avatar.jpg" },
+    { name: "Omen", img: "images/omen-avatar.jpg" },
+    { name: "Killjoy", img: "images/killjoy-avatar.jpg" },
+    { name: "Cypher", img: "images/cypher-avatar.jpg" },
+    { name: "Sova", img: "images/sova-avatar.jpg" },
+    { name: "Sage", img: "images/sage-avatar.jpg" },
+    { name: "Phoenix", img: "images/phoenix-avatar.jpg" },
+    { name: "Jett", img: "images/jett-avatar.jpg" },
+    { name: "Reyna", img: "images/reyna-avatar.jpg" },
+    { name: "Raze", img: "images/raze-avatar.jpg" },
+    { name: "Breach", img: "images/breach-avatar.jpg" },
+    { name: "Skye", img: "images/skye-avatar.jpg" },
+    { name: "Yoru", img: "images/yoru-avatar.jpg" },
+    { name: "Astra", img: "images/astra-avatar.jpeg" },
+    { name: "KAY/O", img: "images/kayo-avatar.jpg" },
+    { name: "Chamber", img: "images/chamber-avatar.jpg" },
+    { name: "Neon", img: "images/neon-avatar.jpeg" },
+    { name: "Fade", img: "images/fade-avatar.jpg" },
+    { name: "Harbor", img: "images/harbor-avatar.jpg" },
+    { name: "Iso", img: "images/iso-avatar.jpg" },
+    { name: "Clove", img: "images/clove-avatar.jpeg" },
+    { name: "Deadlock", img: "images/deadlock-image.jpg" }
 ];
 
 let currentPlayerIndex = 0;
@@ -21,7 +40,7 @@ function startAssignment() {
     players = [];
     playerInputs.forEach(input => {
         if (input.value.trim()) {
-            players.push({name: input.value.trim(), agent: null});
+            players.push({ name: input.value.trim(), agent: null });
             input.disabled = true;
         }
         input.value = input.value.split(':')[0]; // Eliminar asignaciones previas
@@ -45,6 +64,11 @@ function resetAssignments() {
     playerInputs.forEach(input => {
         input.value = input.value.split(':')[0];
         input.disabled = false;
+    });
+
+    document.querySelectorAll('.agent-img').forEach(img => {
+        img.src = 'images/transparent.png';
+        img.style.backgroundColor = 'transparent';
     });
 
     document.getElementById('spinButton').disabled = false;
@@ -75,9 +99,12 @@ function assignAgent() {
     const randomAgent = remainingAgents[randomIndex];
 
     players[currentPlayerIndex].agent = randomAgent;
-    document.querySelectorAll('.player-input')[currentPlayerIndex].value = `${players[currentPlayerIndex].name}: ${randomAgent}`;
+    document.querySelectorAll('.player-input')[currentPlayerIndex].value = players[currentPlayerIndex].name;
+    const imgElement = document.getElementById(`agentImg${currentPlayerIndex + 1}`);
+    imgElement.src = randomAgent.img;
+    imgElement.style.backgroundColor = 'transparent';
     
-    remainingAgents = remainingAgents.filter(agent => agent !== randomAgent);
+    remainingAgents = remainingAgents.filter(agent => agent.name !== randomAgent.name);
     updateAvailableAgentsList();
 
     currentPlayerIndex++;
@@ -106,7 +133,7 @@ function updateAvailableAgentsList() {
     remainingAgents.forEach(agent => {
         const listItem = document.createElement('div');
         listItem.className = 'agent-bubble';
-        listItem.textContent = agent;
+        listItem.textContent = agent.name;
         agentList.appendChild(listItem);
     });
 }
@@ -121,4 +148,7 @@ function deletePlayerContent(button) {
     const input = button.parentNode.querySelector('.player-input');
     input.value = '';
     input.disabled = false;
+    const imgId = `agentImg${Array.from(document.querySelectorAll('.delete-button')).indexOf(button) + 1}`;
+    document.getElementById(imgId).src = 'images/transparent.png';
+    document.getElementById(imgId).style.backgroundColor = 'transparent';
 }
