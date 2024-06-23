@@ -44,15 +44,19 @@
                         <button class="delete-button" onclick="deletePlayerContent(this)"><i class="fas fa-trash-alt"></i></button>
                     </div>
                 </div>
-                <button class="start-button" id="startButton">Start</button>
             </div>
             <div class="right-content">
                 <div class="available-agents" id="availableAgentsList">
                     <h2>Available Agents:</h2>
                     <div id="agentList" class="agent-list"></div>
                 </div>
-                <button class="spin-button" id="spinButton" disabled>Spin</button>
             </div>
+        </div>
+        <div class="button-container">
+            <button class="start-button" id="startButton">Start</button>
+            <button class="shuffle-button" id="spinButton" disabled>
+                <i class="fas fa-random"></i> Shuffle
+            </button>
         </div>
         <div class="loading-container" id="loadingContainer" style="display: none;">
             <div class="loading-spinner"></div>
