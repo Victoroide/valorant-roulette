@@ -31,11 +31,12 @@ let isAnimating = false;
 
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('startButton').addEventListener('click', startAssignment);
-    document.getElementById('spinButton').addEventListener('click', assignAgent);
+    document.getElementById('shuffleButton').addEventListener('click', assignAgent);
     updateAvailableAgentsList();
 });
 
 function startAssignment() {
+    resetAssignments();
     const playerInputs = document.querySelectorAll('.player-input');
     players = [];
     playerInputs.forEach(input => {
@@ -53,7 +54,7 @@ function startAssignment() {
 
     currentPlayerIndex = 0;
     remainingAgents = [...agents];
-    document.getElementById('spinButton').disabled = false;
+    document.getElementById('shuffleButton').disabled = false;
     document.getElementById('startButton').disabled = true;
     updateCurrentPlayerHighlight();
     updateAvailableAgentsList();
@@ -71,7 +72,7 @@ function resetAssignments() {
         img.style.backgroundColor = 'transparent';
     });
 
-    document.getElementById('spinButton').disabled = false;
+    document.getElementById('shuffleButton').disabled = false;
     document.getElementById('startButton').textContent = 'Start';
     document.getElementById('startButton').disabled = false;
     currentPlayerIndex = 0;
@@ -111,7 +112,7 @@ function assignAgent() {
     if (currentPlayerIndex < players.length) {
         updateCurrentPlayerHighlight();
     } else {
-        document.getElementById('spinButton').disabled = true;
+        document.getElementById('shuffleButton').disabled = true;
         document.getElementById('startButton').textContent = 'Restart';
         document.getElementById('startButton').disabled = false;
     }
