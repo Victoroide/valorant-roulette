@@ -44,7 +44,7 @@ function startAssignment() {
             players.push({ name: input.value.trim(), agent: null });
             input.disabled = true;
         }
-        input.value = input.value.split(':')[0]; // Eliminar asignaciones previas
+        input.value = input.value.split(':')[0]; 
     });
 
     if (players.length === 0) {
@@ -143,6 +143,22 @@ function editPlayer(button) {
     const input = button.parentNode.querySelector('.player-input');
     input.disabled = false;
     input.focus();
+    button.innerHTML = '<i class="fas fa-check"></i>';
+    button.style.backgroundColor = '#43a047'; 
+    button.onclick = function() { confirmEdit(button); };
+    input.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            confirmEdit(button);
+        }
+    });
+}
+
+function confirmEdit(button) {
+    const input = button.parentNode.querySelector('.player-input');
+    input.disabled = true;
+    button.innerHTML = '<i class="fas fa-edit"></i>';
+    button.style.backgroundColor = '';
+    button.onclick = function() { editPlayer(button); };
 }
 
 function deletePlayerContent(button) {
