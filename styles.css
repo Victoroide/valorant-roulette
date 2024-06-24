@@ -266,6 +266,7 @@ h1 {
     }
 
     .agent-list {
+        margin: 20px;
         justify-content: center;
     }
 }
