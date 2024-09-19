@@ -21,7 +21,8 @@ const agents = [
     { name: "Harbor", img: "images/harbor-avatar.jpg" },
     { name: "Iso", img: "images/iso-avatar.jpg" },
     { name: "Clove", img: "images/clove-avatar.jpeg" },
-    { name: "Deadlock", img: "images/deadlock-image.jpg" }
+    { name: "Deadlock", img: "images/deadlock-image.jpg" },
+    { name: "Vyse", img: "images/vyse-avatar.jpg"},
 ];
 
 let currentPlayerIndex = 0;
